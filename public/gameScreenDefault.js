@@ -3,10 +3,6 @@ var game;
 
 var socket = io();
 
-window.onclick = function(e) {
-    socket.emit('message', 'hello world!');
-};
-
 window.onload = function () { initGame(); };
 var initGame = function () {
     var cfg = {
