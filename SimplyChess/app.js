@@ -1,7 +1,8 @@
 var express = require("express");
 var http = require("http");
 
-var port = process.argv[2];
+
+var port = process.argv[2] || 3000;
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
