@@ -1,48 +1,63 @@
-// var board;
-// var game;
+let template = ''
++'<% for (let i = 8; i > 0; i--) { %>'
++    '<div class="row">'
++       '<% columns.forEach(function(col) { %>'
++           '<div class="square" id="<%= col %><%= i %>" ondrop="drop(event)" ondragover="dragOver(event)" ondragenter="enter(event)" ondragexit="exit(event)"></div>'
++       '<% }) %>'
++    '</div>'
++'<% } %>';
 
-// var socket = io();
+let columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+document.getElementById("chess-board").innerHTML = ejs.render(template, {columns: columns});
 
-// window.onload = function () { initGame(); };
-// var initGame = function () {
-//     var cfg = {
-//         draggable: true,
-//         position: 'start',
-//         onDrop: handleMove,
-//     };
-//     board = new ChessBoard('gameBoard', cfg);
-//     game = new Chess();
+let piecesArr = ['rook', 'knight', 'bishop', 'queen', 'king', 'bishop', 'knight', 'rook'];
 
-// };
+document.getElementById("chess-board").childNodes[0].childNodes.forEach(function(el, index) {
+    el.appendChild(buildPiece(piecesArr[index], 'black'));
+});
 
-// // called when a player makes a move on the board UI
-// var handleMove = function(source, target) {
-//     var move = game.move({from: source, to: target});
-    
-//     if (move === null)  return 'snapback';
-//     else socket.emit('move', move);
-    
-// };
+document.getElementById("chess-board").childNodes[7].childNodes.forEach(function(el, index) {
+    el.appendChild(buildPiece(piecesArr[index], 'white'));
+});
 
-// // called when the server calls socket.broadcast('move')
-// socket.on('move', function (msg) {
-//     game.move(msg);
-//     board.position(game.fen()); // fen is the board layout
-// });
+document.getElementById("chess-board").childNodes[1].childNodes.forEach(function(el, index) {
+    el.appendChild(buildPiece('pawn', 'black'));
+});
 
-function allowDrop(ev) {
+document.getElementById("chess-board").childNodes[6].childNodes.forEach(function(el, index) {
+    el.appendChild(buildPiece('pawn', 'white'));
+});
+
+function buildPiece(pieceName, color) {
+    let piece = document.createElement(pieceName);
+    piece.className = color;
+    piece.draggable = "true";
+    piece.addEventListener('dragstart', drag);
+    return piece;
+}
+
+
+function dragOver(ev) {
     ev.preventDefault();
 }
+
 
 let el;
 function drag(ev) {
     ev.dataTransfer.setData("text", null);
-    ev.dataTransfer.dropEffect = "move";
     el = ev.target;
 }
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(el);
+    ev.currentTarget.appendChild(el);
+    exit(ev);
+}
+
+function enter(ev) {
+    ev.currentTarget.style.border = "2px black solid";
+}
+
+function exit(ev) {
+    ev.currentTarget.style.border = "0px";
 }
