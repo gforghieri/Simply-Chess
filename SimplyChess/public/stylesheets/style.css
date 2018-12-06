@@ -32,44 +32,7 @@ body {
 	background: rgb(253, 209, 170);
 }
 
-bishop.white {
-	content:url("/images/chesspieces/wB.png");
-}
-bishop.black {
-	content:url("/images/chesspieces/bB.png");
-}
-king.white {
-	content:url("/images/chesspieces/wK.png");
-}
-king.black {
-	content:url("/images/chesspieces/bK.png");
-}
-knight.white {
-	content:url("/images/chesspieces/wN.png");
-}
-knight.black {
-	content:url("/images/chesspieces/bN.png");
-}
-pawn.white {
-	content:url("/images/chesspieces/wP.png");
-}
-pawn.black {
-	content:url("/images/chesspieces/bP.png");
-}
-queen.white {
-	content:url("/images/chesspieces/wQ.png");
-}
-queen.black {
-	content:url("/images/chesspieces/bQ.png");
-}
-rook.white {
-	content:url("/images/chesspieces/wR.png");
-}
-rook.black {
-	content:url("/images/chesspieces/bR.png");
-}
-
-bishop, king, knight, pawn, queen, rook {
+img.piece {
 	max-width: 100%;
 	max-height: 90%;
 	display: block;
