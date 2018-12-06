@@ -7,7 +7,8 @@ var app = express();
 
 app.use(express.static(__dirname + "/public"));
 http.createServer(app).listen(port);
+  console.log('listening on *: ' + port);
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/gameScreen.html');
+  res.sendFile(__dirname + '/public/splashScreen.html');
 });
