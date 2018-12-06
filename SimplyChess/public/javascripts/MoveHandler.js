@@ -1,4 +1,10 @@
 
-document.addEventListener('onPieceMoved', function(ev) {
-    console.log(ev.detail);
-});
+let chessBoard = new ChessBoard(onPieceMoved);
+
+chessBoard.setPlayColor('white');
+chessBoard.allowMovement();
+
+
+function onPieceMoved(moveObj) {
+    console.log(moveObj);
+}
