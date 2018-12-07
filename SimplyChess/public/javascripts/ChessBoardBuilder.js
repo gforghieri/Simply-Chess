@@ -95,3 +95,9 @@ function leave(ev) {
 function dragOver(ev) {
     ev.preventDefault();
 }
+
+window.onload = function () {
+    document.getElementById('button').onclick = function () {
+        document.getElementById('modal').style.display = "none"
+    };
+};
