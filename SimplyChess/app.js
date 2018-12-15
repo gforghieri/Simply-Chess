@@ -7,23 +7,35 @@ const Game = require("./game.js");
 
 const app = express();
 const server = http.createServer(app);
+const wss = new websocket.Server({server});
+
+
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/public/splashScreen.html');
+  res.render(__dirname + '/views/splashScreen.ejs', {
+    gamesPlayed: startedGames,
+    playersOnline: wss.clients.size,
+    daysUntilLoan: Math.floor((new Date('2018-12-23') - new Date()) / 86400000)
+  });
 });
 
 app.get('/game', function (req, res) {
   res.sendFile(__dirname + '/public/gameScreen.html');
 });
 
-const wss = new websocket.Server({server});
+
 
 // games is the object containing all the games that are in progress.
 // the key is the gameId of each game, the value is a gameObj (built via new Game()).
 const games = {}; 
 
+// nextGameId keeps track of the gameId that will be assigned to the next websocket that connects
 let nextGameId = 0;
+
+// startedGames keeps track of how many games have been started in total
+let startedGames = 0;
 
 wss.on('connection', function(ws) {
 
@@ -104,6 +116,7 @@ function startGame(gameObj) {
   gameObj.w.send(JSON.stringify(obj));
   obj.playColor = Messages.COLOR_BLACK;
   gameObj.b.send(JSON.stringify(obj));
+  startedGames++;
 }
 
 server.listen(port);
