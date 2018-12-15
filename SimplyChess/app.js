@@ -4,7 +4,9 @@ const websocket = require("ws");
 const Chess = require("chess.js").Chess;
 const Messages = require('./public/javascripts/messages.js');
 
-const port = process.argv[2] || 3000;
+//const port = process.argv[2] || 3000;
+const port = process.env.PORT || 3000;
+
 const app = express();
 const server = http.createServer(app);
 app.use(express.static(__dirname + "/public"));
