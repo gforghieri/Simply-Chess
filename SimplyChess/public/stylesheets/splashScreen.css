@@ -7,12 +7,11 @@
     height: 100vh;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-gap: 5px;
     grid-template-areas:
-        "pic pic pic pic time time time"
+        "pic pic pic pic games games games"
         "pic pic pic pic players players players"
-        "pic pic pic pic fastest fastest fastest"
         "pic pic pic pic loan loan loan"
         "pic pic pic pic how how how"
         "pic pic pic pic play play play";
@@ -40,17 +39,14 @@ body {
     padding-left: 10px;
 }
 
-.playtime {
-    grid-area: time;
+.games {
+    grid-area: games;
 }
 
 .players {
     grid-area: players;
 }
 
-.fastest {
-    grid-area: fastest;
-}
 
 .loan {
     grid-area: loan;
