@@ -211,3 +211,27 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* === SCREEN TOO SMALL */
+#screen-too-small {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #4E5153;
+    font-size: 2em;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+
+}
+
+@media only screen and (min-width: 1366px) and (min-height: 650px) {
+    #screen-too-small {
+        display: none;
+    }
+}
