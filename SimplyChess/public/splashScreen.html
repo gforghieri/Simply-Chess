@@ -8,26 +8,39 @@
 
 <body>
   <div class="container">
-    <div class="picture"><img src="images/splashimages/Logo.png" alt="Logo"></div>
-    <div class="playtime">
+    <div class="picture">
+      <img src="images/splashimages/Logo.png" alt="Logo">
+    </div>
+
+    <div class="playtime stats">
       <p>Total playtime: 2535 h</p>
     </div>
-    <div class="players">
+    <div class="players stats">
       <p>Players online: 36</p>
     </div>
-    <div class="fastest">Fastest win: 25.6 s</div>
-    <div class="loan">Days until loan payment: 2</div>
+    <div class="fastest stats">
+      Fastest win: 25.6 s
+    </div>
+    <div class="loan stats">
+      Days until loan payment: 2
+    </div>
 
-    <div class="how"><button id="myBtn" class="buttonhow">How to play?</button></div>
-    <div class="play"><a href="/game"><button id="myBtn2" class="buttonplay" style="vertical-align: middle"><span>Play!</span></button></a></div>
+    <div class="how">
+      <button id="explanationBtn">How to play?</button>
+    </div>
+    <div class="play">
+        <form action="/game">
+          <button type="submit" id="playBtn"><span>Play!</span></button>
+        </form>
+    </div>
   </div>
 
   
   <!-- The Modal -->
-  <div id="myModal" class="modal">
+  <div id="explanationModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span id="closeModalCross" class="close">&times;</span>
       <p>Standard chess logic applies, drag and drop pieces with the mouse.</p>
     </div>
   </div>
@@ -35,7 +48,7 @@
   <div id="screen-too-small">
     Sadly, your screen is too small to play this game. <br>
       (min-width: 1366px) and (min-height: 650px)
- </div>
+  </div>
 
   <script src="javascripts/messages.js"></script>
   <script src="javascripts/splashScreen.js"></script>
