@@ -1,4 +1,3 @@
-
 //const socket = new WebSocket("wss://simplychess.azurewebsites.net");
 const socket = new WebSocket("ws://localhost:3000");
 let chessBoard;
@@ -7,7 +6,9 @@ socket.onmessage = startGameMsgHandler;
 
 function startGameMsgHandler(event) {
     let msg = JSON.parse(event.data);
-    if(msg.type === Messages.T_GAME_START) {
+    if (msg.type === Messages.T_GAME_START) {
+
+        timer();
 
         document.getElementById('modal').style.display = "none";
         chessBoard = new ChessBoard(onPieceMoved);
@@ -19,6 +20,7 @@ function startGameMsgHandler(event) {
             chessBoard.allowMovement();
 
         socket.onmessage = gamePlayMsgHandler;
+        
     }
 }
 
@@ -30,11 +32,12 @@ function moveVerifier(event) {
     }
 }
 
+
 function gamePlayMsgHandler(event) {
 
     let msg = JSON.parse(event.data);
 
-    switch(msg.type) {
+    switch (msg.type) {
         case Messages.T_MOVE:
             chessBoard.movePiece({
                 origin: msg.from,
@@ -43,7 +46,7 @@ function gamePlayMsgHandler(event) {
             chessBoard.allowMovement();
             break;
         case Messages.T_GAME_END:
-            switch(msg.result) {
+            switch (msg.result) {
                 case Messages.GAME_WON:
                     alert('You have won the game!');
                     break;

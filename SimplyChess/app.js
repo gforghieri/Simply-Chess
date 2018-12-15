@@ -4,6 +4,7 @@ const websocket = require("ws");
 const Messages = require('./public/javascripts/messages.js');
 const port = process.env.PORT || 3000;
 const Game = require("./game.js");
+var cookies = require("cookie-parser");
 
 const app = express();
 const server = http.createServer(app);
@@ -12,12 +13,20 @@ const wss = new websocket.Server({server});
 
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(cookies());
 
 app.get('/', function (req, res) {
+  let visitCount = req.cookies.visitCount;
+  if(visitCount === undefined) 
+    visitCount = 0;
+  
+  visitCount++;
+  res.cookie("visitCount", visitCount);
   res.render(__dirname + '/views/splashScreen.ejs', {
     gamesPlayed: startedGames,
     playersOnline: wss.clients.size,
-    daysUntilLoan: Math.floor((new Date('2018-12-23') - new Date()) / 86400000)
+    daysUntilLoan: Math.floor((new Date('2018-12-23') - new Date()) / 86400000),
+    visitCount: visitCount
   });
 });
 
