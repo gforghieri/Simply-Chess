@@ -7,13 +7,13 @@
  *      - Make sure to specify a callback function in the constructor. This function will
  *        be called whenever the user moved a piece. It will be called with as its only parameter a moveObj.
  *        A moveObj has this form: let moveObj = {
- *                                      origin: 'H6',
- *                                      destination: 'G5'
+ *                                      origin: 'h6',
+ *                                      destination: 'g5'
  *                                 }
  *      - chessBoard.setPlayColor(color) must be called once before the game starts. 
  *        Parameter color must be 'white' or 'black'.
  *      - chessBoard.movePiece(moveObj) will move a piece according to the moveObj.
- *      - chessBoard.undoMove() will undo the latest move. 
+ *      - chessBoard.undoMove() will undo the latest move. It will automaticcaly call allowMovement().
  *      - chessBoard.allowMovement() will allow the player to make a move with his color.
  *
  */
@@ -24,7 +24,7 @@ function ChessBoard(OnPieceMovedCallback) {
     /* This part is concerned with drawing the board */
     //////////////////////////////////////////////////
 
-    const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    const columns = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     const chessBoard = document.getElementById('chess-board');
 
     for (let i = 8; i > 0; i--) {
@@ -158,7 +158,7 @@ function ChessBoard(OnPieceMovedCallback) {
                 origin: lastMove.destination,
                 destination: lastMove.origin
             });
-            movingIsAllowed = true;
+            this.allowMovement();
         },
         allowMovement: function() {
             movingIsAllowed = true;
