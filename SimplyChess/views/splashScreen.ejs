@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Simply Chess</title>
+  <link rel="stylesheet" href="stylesheets/splashScreen.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="picture">
+      <img src="images/splashimages/Logo.png" alt="Logo">
+    </div>
+
+    <div class="games stats">
+      <p>Total games played: <%= gamesPlayed %></p>
+    </div>
+    <div class="players stats">
+      <p>Players online: <%= playersOnline %></p>
+    </div>
+    <div class="loan stats">
+      Days until loan payment: <%= daysUntilLoan %>
+    </div>
+
+    <div class="how">
+      <button id="explanationBtn">How to play?</button>
+    </div>
+    <div class="play">
+        <form action="/game">
+          <button type="submit" id="playBtn"><span>Play!</span></button>
+        </form>
+    </div>
+  </div>
+
+  
+  <!-- The Modal -->
+  <div id="explanationModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="closeModalCross" class="close">&times;</span>
+      <p>Standard chess logic applies, drag and drop pieces with the mouse.</p>
+    </div>
+  </div>
+
+  <div id="screen-too-small">
+    Sadly, your screen is too small to play this game. <br>
+      (min-width: 1366px) and (min-height: 650px)
+  </div>
+
+  <script src="javascripts/messages.js"></script>
+  <script src="javascripts/splashScreen.js"></script>
+
+</body>
+
+</html>
