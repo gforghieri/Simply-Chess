@@ -1,41 +1,35 @@
 const express = require("express");
 const http = require("http");
 const websocket = require("ws");
-const Chess = require("chess.js").Chess;
 const Messages = require('./public/javascripts/messages.js');
-
-//const port = process.argv[2] || 3000;
 const port = process.env.PORT || 3000;
+const Game = require("./game.js");
 
 const app = express();
 const server = http.createServer(app);
 app.use(express.static(__dirname + "/public"));
 
 app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/public/splashScreen.html');
+});
+
+app.get('/game', function (req, res) {
   res.sendFile(__dirname + '/public/gameScreen.html');
 });
 
 const wss = new websocket.Server({server});
 
-// games is the object containing all the games that are in progress
-// the key is the gameId of each game, the value is a gameObj.
-let games = {}; 
-
-// example gameObj:
-// gameObj = {
-// 	chess: new Chess(),
-// 	w: // ws object of white player
-// 	b: // ws object of black player
-// 	getOpponent: function(myPlayColor) {
-// 		return this[myPlayColor == 'w' ? 'b' : 'w'];
-// 	}
-// };
+// games is the object containing all the games that are in progress.
+// the key is the gameId of each game, the value is a gameObj (built via new Game()).
+const games = {}; 
 
 let nextGameId = 0;
 
 wss.on('connection', function(ws) {
 
+  // assign this new websocket a gameId
   ws.gameId = nextGameId;
+  
   if (games.hasOwnProperty(nextGameId)) {
     // if this is the case, this game is currently waiting for a partner
     nextGameId++;
@@ -46,21 +40,15 @@ wss.on('connection', function(ws) {
     startGame(games[ws.gameId]);
 
   } else {
-    games[ws.gameId] = {
-      chess: new Chess(),
-      w: ws,
-      b: null,
-      getOpponent: function(myPlayColor) {
-        return this[myPlayColor == 'w' ? 'b' : 'w'];
-      }
-    }
+    games[ws.gameId] = new Game();
+    games[ws.gameId].w = ws;
     // the first player always plays white
     ws.playColor = 'w';
   }
 
   ws.on('message', function(message) {
+    try {
       let msg = JSON.parse(message);
-      console.log(msg);
       if (msg.type === Messages.T_MOVE) {
         let game = games[ws.gameId];
         // check whether the player moved its own color
@@ -73,23 +61,41 @@ wss.on('connection', function(ws) {
           ws.send(Messages.LEGAL_MOVE);
           game.getOpponent(ws.playColor).send(message);
           
+          // check if this move resulted in checkmate or stalemate
           if (game.chess.in_checkmate()) {
-            let obj = Messages.O_GAME_END;
-            obj.result = Messages.GAME_WON;
-            ws.send(JSON.stringify(obj));
-            obj.result = Messages.GAME_LOST;
-            game.getOpponent(ws.playColor).send(JSON.stringify(obj));
+            let msg = Messages.O_GAME_END;
+            msg.result = Messages.GAME_WON;
+            ws.send(JSON.stringify(msg));
+            msg.result = Messages.GAME_LOST;
+            game.getOpponent(ws.playColor).send(JSON.stringify(msg));
           } else if (game.chess.in_stalemate()) {
-            let obj = Messages.O_GAME_END;
-            obj.result = Messages.GAME_DRAW;
-            ws.send(JSON.stringify(obj));
-            game.getOpponent(ws.playColor).send(JSON.stringify(obj));
+            let msg = Messages.O_GAME_END;
+            msg.result = Messages.GAME_DRAW;
+            ws.send(JSON.stringify(msg));
+            game.getOpponent(ws.playColor).send(JSON.stringify(msg));
           }
         }
 
       }
+    } catch(e) {
+      // this happens if the client sent something that was not JSON 
+      // if we don't catch that the server crashes
+    }
   });
 
+  ws.on('close', function() {
+    let game = games[ws.gameId];
+    if (game) {      
+      let opponent = game.getOpponent(ws.playColor);
+      delete games[ws.gameId];
+      if (opponent) {
+        let msg = Messages.O_GAME_END;
+        msg.result = Messages.GAME_WON;
+        opponent.send(JSON.stringify(msg));
+        opponent.terminate();
+      }   
+    }
+  });
 });
 
 function startGame(gameObj) {
@@ -99,8 +105,5 @@ function startGame(gameObj) {
   obj.playColor = Messages.COLOR_BLACK;
   gameObj.b.send(JSON.stringify(obj));
 }
-
-
-
 
 server.listen(port);

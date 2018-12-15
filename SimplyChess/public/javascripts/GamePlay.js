@@ -1,12 +1,12 @@
 
-const socket = new WebSocket("wss://simplychess.azurewebsites.net");
+//const socket = new WebSocket("wss://simplychess.azurewebsites.net");
+const socket = new WebSocket("ws://localhost:3000");
 let chessBoard;
 
 socket.onmessage = startGameMsgHandler;
 
 function startGameMsgHandler(event) {
     let msg = JSON.parse(event.data);
-    console.log(msg);
     if(msg.type === Messages.T_GAME_START) {
 
         document.getElementById('modal').style.display = "none";
@@ -15,19 +15,14 @@ function startGameMsgHandler(event) {
         let color = msg.playColor;
         chessBoard.setPlayColor(color);
 
-        if (color === Messages.COLOR_WHITE) {
+        if (color === Messages.COLOR_WHITE)
             chessBoard.allowMovement();
-            socket.onmessage = moveVerifier;
-        } else {
-            // player is plays black
-            socket.onmessage = gamePlayMsgHandler;
-        }
 
+        socket.onmessage = gamePlayMsgHandler;
     }
 }
 
 function moveVerifier(event) {
-    console.log(event.data);
     if (event.data === Messages.ILLEGAL_MOVE) {
         chessBoard.undoMove();
     } else if (event.data === Messages.LEGAL_MOVE) {
@@ -38,9 +33,7 @@ function moveVerifier(event) {
 function gamePlayMsgHandler(event) {
 
     let msg = JSON.parse(event.data);
-    console.log(msg);
 
-    console.log(Messages.T_MOVE);
     switch(msg.type) {
         case Messages.T_MOVE:
             chessBoard.movePiece({
@@ -50,10 +43,21 @@ function gamePlayMsgHandler(event) {
             chessBoard.allowMovement();
             break;
         case Messages.T_GAME_END:
+            switch(msg.result) {
+                case Messages.GAME_WON:
+                    alert('You have won the game!');
+                    break;
+                case Messages.GAME_LOST:
+                    alert('You have lost the game!');
+                    break;
+                case Messages.GAME_DRAW:
+                    alert('It\'s a draw!');
+                    break;
+            }
+            window.location.replace('http://localhost:3000/');
             break;
     }
 }
-
 
 function onPieceMoved(moveObj) {
     let obj = Messages.O_MOVE;
