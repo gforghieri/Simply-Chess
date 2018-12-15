@@ -25,7 +25,6 @@ let counter = document.getElementsByTagName('time')[0],
     t;
 
 function add() {
-  timer();
     seconds++;
     if (seconds >= 60) {
         seconds = 0;
@@ -36,6 +35,5 @@ function add() {
 
 }
 function timer() {
-    setTimeout(add, 1000);
+    setInterval(add, 1000);
 }
-timer();

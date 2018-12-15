@@ -4,6 +4,7 @@ const websocket = require("ws");
 const Messages = require('./public/javascripts/messages.js');
 const port = process.env.PORT || 3000;
 const Game = require("./game.js");
+var cookies = require("cookie-parser");
 
 const app = express();
 const server = http.createServer(app);
@@ -107,3 +108,15 @@ function startGame(gameObj) {
 }
 
 server.listen(port);
+
+function getPlayedCookie(req, res) {
+  let played = req.cookies["played"];
+  if(played == undefined) played = 0;
+  played++;
+  res.cookie("played", played);
+  return played;
+}
+
+function renderSplash(req, res) {
+  res.render('splashScreen', {played: getPlayedCookie(req, res)});
+}

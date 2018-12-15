@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  
+
   <div id="modal">
     <div class="modalconent">
       <p>Waiting for another player...</p>
@@ -17,24 +17,20 @@
   <div class="container">
     <div class="timer">Time elapsed: <time>00:00</time></div>
     <div id="chess-board"></div>
-    <div class="resign"><button class="buttonresign"><span>Resign</span></button></div>
+    <div class="resign"><a href="/"><button class="buttonresign"><span>Resign</span></button></a></div>
     <div class="fullscreen"><button class="buttonfullscreen" onclick="toggleFullScreen()"><img src="images/splashimages/expand.svg"
           alt="expand"></button></div>
   </div>
 
-
-
   <div id="screen-too-small">
     Sadly, your screen is too small to play this game. <br>
-    (min-width: 1366px) and (min-height: 650px)
+    (min-width: 400px) and (min-height: 400px)
   </div>
 </body>
-
 
 <script src="javascripts/messages.js"></script>
 <script src="javascripts/ChessBoardBuilder.js"></script>
 <script src="javascripts/GamePlay.js"></script>
 <script src="javascripts/gameScreen.js"></script>
-
 
 </html>

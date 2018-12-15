@@ -12,11 +12,13 @@
 	width: 50%;
 	font-family: 'Open Sans', sans-serif;
 	border: 1px solid black;
+	visibility: hidden;
 
 }
 
 .resign {
 	text-align: center;
+	visibility: hidden;
 }
 
 .buttonresign {
@@ -153,7 +155,7 @@ img.piece {
 
 }
 
-@media only screen and (min-width: 400px) and (min-height: 400px) {
+@media only screen and (min-width: 800px) and (min-height: 400px) {
     #screen-too-small {
         display: none;
     }
@@ -161,6 +163,7 @@ img.piece {
 
 .fullscreen {
 	position: relative;
+	visibility: hidden;
 }
 
 .fullscreen img {
@@ -168,7 +171,6 @@ img.piece {
 	margin-left: auto;
 	margin-right: auto;
 	color: black;
-
 	
 }
 
@@ -191,10 +193,10 @@ img.piece {
 	}
   }
   
-  body {  
+  #chess-board {  
 	/* This section calls the slideInFromLeft animation we defined above */
-	animation: 1s ease-out 0s 1 slideInFromLeft;
+	animation: 4s ease-out 0s 1 slideInFromLeft;
 	
 	background: #333;
-	padding: 30px;
+	/* padding: 30px; */
   }
