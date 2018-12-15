@@ -9,7 +9,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\SimplyChess\\app.js"
+            "program": "${workspaceFolder}/SimplyChess/app.js"
         }
     ]
 }
