@@ -5,6 +5,7 @@
 
 
     // This message is sent by the server when the client is paired with an opponent and the game can begin
+    // The server guarantees that this is the first message it sents to the client after the websocket connection is established
     exports.T_GAME_START = 'game-start';
     exports.COLOR_WHITE = 'white';
     exports.COLOR_BLACK = 'black';
@@ -18,8 +19,8 @@
     exports.T_MOVE = 'move-object';
     exports.O_MOVE = {
         type: exports.T_MOVE,
-        origin: null,       // 'A6'
-        destination: null   // 'B4'
+        from: null,       // 'a6'
+        to: null   // 'b4'
     };
 
 
