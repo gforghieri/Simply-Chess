@@ -13,8 +13,10 @@
         "pic pic pic pic games games games"
         "pic pic pic pic players players players"
         "pic pic pic pic loan loan loan"
+        "pic pic pic pic visited visited visited"
         "pic pic pic pic how how how"
         "pic pic pic pic play play play";
+        
 }
 
 body {
@@ -50,6 +52,10 @@ body {
 
 .loan {
     grid-area: loan;
+}
+
+.visited {
+    grid-area: visited;
 }
 
 .how {

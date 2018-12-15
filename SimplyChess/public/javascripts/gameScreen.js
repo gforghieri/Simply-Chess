@@ -37,3 +37,7 @@ function add() {
 function timer() {
     setInterval(add, 1000);
 }
+
+function resignGame() {
+  
+}
