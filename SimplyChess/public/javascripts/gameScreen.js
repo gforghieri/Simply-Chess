@@ -7,9 +7,9 @@ function toggleFullScreen() {
     document.documentElement.requestFullscreen();
 }
 
-let counter = document.getElementsByTagName('time')[0],
-    seconds = 0, minutes = 0,
-    t;
+const counter = document.getElementsByTagName('time')[0];
+let seconds = 0;
+let minutes = 0;
 
 function add() {
     seconds++;
