@@ -39,3 +39,49 @@ img.piece {
 	margin: 0 auto;
 	margin-top: 3%;
 }
+
+/* The Modal (background) */
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+}
+.modalconent {
+    background-color: #fff5f5;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%; /* Could be more or less, depending on screen size */
+    border-radius: 5px;
+    font-size: 2em;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+/* === SCREEN TOO SMALL */
+#screen-too-small {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #4E5153;
+    font-size: 2em;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+
+}
+
+@media only screen and (min-width: 1366px) and (min-height: 650px) {
+    #screen-too-small {
+        display: none;
+    }
+}
