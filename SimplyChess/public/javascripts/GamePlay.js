@@ -18,7 +18,6 @@ function startGameMsgHandler(event) {
 
         let color = msg.playColor;
         chessBoard.setPlayColor(color);
-        alert("You are playing the " + color + " side.");
 
         if (color === Messages.COLOR_WHITE)
             chessBoard.allowMovement();
