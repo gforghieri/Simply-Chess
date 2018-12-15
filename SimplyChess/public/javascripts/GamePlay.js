@@ -1,27 +1,19 @@
 
+var socket = new WebSocket("ws://localhost:3000");
 
-function onPieceMoved(moveObj) {
-    console.log(moveObj);
-}
+// socket.onmessage = function(event){
+//     console.log(event.data);
+//     let recievedMessage = JSON.parse(event.data);
 
+//     if(recievedMessage.type === Messages.T_GAME_START) {
 
-let chessBoard;
+//         document.getElementById('modal').style.display = "none";
+//         chessBoard = new ChessBoard(onPieceMoved);
 
-const socket = new WebSocket("ws://localhost:3000");
+//         let color = recievedMessage.playColor;
+//         chessBoard.setPlayColor(color);
 
-socket.onmessage = function(event){
-    console.log(event.data);
-    let recievedMessage = JSON.parse(event.data);
-
-    if(recievedMessage.type === Messages.T_GAME_START) {
-
-        document.getElementById('modal').style.display = "none";
-        chessBoard = new ChessBoard(onPieceMoved);
-
-        let color = recievedMessage.playColor;
-        chessBoard.setPlayColor(color);
-
-        if (color === Messages.COLOR_WHITE)
-            chessBoard.allowMovement();
-    }
-}
+//         if (color === Messages.COLOR_WHITE)
+//             chessBoard.allowMovement();
+//     }
+// }
