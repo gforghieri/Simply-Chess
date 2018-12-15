@@ -1,5 +1,5 @@
 
-const socket = new WebSocket("ws://simplychess.azurewebsites.net:8080");
+const socket = new WebSocket("wss://simplychess.azurewebsites.net");
 let chessBoard;
 
 socket.onmessage = startGameMsgHandler;
