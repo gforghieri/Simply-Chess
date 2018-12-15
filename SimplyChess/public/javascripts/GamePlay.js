@@ -12,9 +12,6 @@ function startGameMsgHandler(event) {
 
         document.getElementById('modal').style.display = "none";
         chessBoard = new ChessBoard(onPieceMoved);
-        document.getElementsByClassName('timer')[0].style.visibility = "visible";
-        document.getElementsByClassName('resign')[0].style.visibility = "visible";
-        document.getElementsByClassName('fullscreen')[0].style.visibility = "visible";
 
         let color = msg.playColor;
         chessBoard.setPlayColor(color);

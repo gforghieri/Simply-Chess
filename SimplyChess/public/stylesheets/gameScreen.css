@@ -1,82 +1,69 @@
-.timer {
-    margin: auto;
-    margin-top: 2%;
-    margin-bottom: 5%;
-    width: 100%;
-    text-align: center;
-    padding: 15px;
-    background: rgb(253, 209, 170);
-    border-radius: 10px;
-    font-size: 1.5em;
-    width: 50%;
-    font-family: 'Open Sans', sans-serif;
-    border: 1px solid black;
-    visibility: hidden;
-
-}
-
-.resign {
-    text-align: center;
-    visibility: hidden;
-}
-
-.buttonresign {
-    display: inline-block;
-    margin-top: 5%;
-    padding: 15px 30px;
-    font-size: 1.5em;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    outline: none;
-    color: rgb(0, 0, 0);
-    background-color: rgb(253, 209, 170);
-    border: none;
-    font-family: 'Open Sans', sans-serif;
-    transition: all 0.5s;
-    border-radius: 10px;
-    border: 1px solid black;
-}
-
-.buttonresign span {
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  .buttonresign span:after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-  }
-
-  .buttonresign:hover span {
-    padding-right: 20px;
-  }
-  
-  .buttonresign:hover span:after {
-    opacity: 1;
-    right: 0;
-  }
-
-.buttonresign:hover {background-color: rgb(247, 198, 156)}
-
-.buttonresign:active {
-    background-color: rgb(247, 198, 156);
-    transform: translateY(8px);
-}
-
-
 body {
     overflow-y: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #4E5153;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.timer {
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    text-align: center;
+    padding: 15px;
+    background: rgb(253, 209, 170);
+    border-radius: 10px;
+    font-size: 1.5em;
+    width: 50%;
+    border: 1px solid black;
+}
+
+.resign {
+    text-align: center;
+}
+
+.buttonresign {
+    margin-top: 5%;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    background-color: rgb(253, 209, 170);
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: all 0.5s;
+}
+
+.buttonresign span {
+    position: relative;
+    transition: 0.5s;
+}
+
+.buttonresign span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.buttonresign:hover span {
+    padding-right: 20px;
+}
+
+.buttonresign:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.buttonresign:hover {
+    background-color: rgb(247, 198, 156)
+}
+
+.buttonresign:active {
+    background-color: rgb(247, 198, 156);
+    transform: translateY(8px);
 }
 
 #chess-board {
@@ -122,7 +109,7 @@ img.piece {
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.8);
+    background: black;
     z-index: 99999;
     height: 100%;
     width: 100%;
@@ -135,7 +122,6 @@ img.piece {
     width: 40%; /* Could be more or less, depending on screen size */
     border-radius: 5px;
     font-size: 2em;
-    font-family: 'Open Sans', sans-serif;
     text-align: center;
 }
 
@@ -148,7 +134,6 @@ img.piece {
     top: 0;
     background-color: #4E5153;
     font-size: 2em;
-    font-family: 'Open Sans', sans-serif;
     text-align: center;
     color: #ffffff;
     display: flex;
@@ -165,7 +150,6 @@ img.piece {
 
 .fullscreen {
     position: relative;
-    visibility: hidden;
 }
 
 .fullscreen img {
