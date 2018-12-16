@@ -8,13 +8,18 @@ function startGameMsgHandler(event) {
     let msg = JSON.parse(event.data);
     if (msg.type === Messages.T_GAME_START) {
 
-        timer();
-
-        document.getElementById('modal').style.display = "none";
         chessBoard = new ChessBoard(onPieceMoved);
-
         let color = msg.playColor;
         chessBoard.setPlayColor(color);
+
+        document.getElementById('modal').style.display = "none";
+        let colorEl = document.getElementById('playColor');
+        colorEl.firstElementChild.innerHTML += color + "!";
+        setTimeout(function() {
+            colorEl.remove();
+        }, 4000);
+
+        timer();
 
         if (color === Messages.COLOR_WHITE)
             chessBoard.allowMovement();
