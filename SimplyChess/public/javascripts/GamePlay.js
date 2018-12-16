@@ -62,7 +62,7 @@ function gamePlayMsgHandler(event) {
                     alert('It\'s a draw!');
                     break;
             }
-            window.location.replace('http://localhost:3000/');
+            window.location.replace('/');
             break;
     }
 }
