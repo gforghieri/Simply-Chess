@@ -171,7 +171,7 @@ button:hover, button:active {
     align-items: center; /* align vertical */
 }
 
-@media only screen and (min-width: 40px) and (min-height: 40px) {
+@media only screen and (min-width: 800px) and (min-height: 600px) {
     #screen-too-small {
         display: none;
     }
