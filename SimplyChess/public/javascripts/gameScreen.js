@@ -12,35 +12,22 @@ function toggleFullScreen() {
   } else if (elem.msRequestFullscreen) { /* IE/Edge */
     elem.msRequestFullscreen();
   }
-  /* Close fullscreen */
-  else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { /* Firefox */
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE/Edge */
-      document.msExitFullscreen();
+}
+  const counter = document.getElementsByTagName('time')[0];
+  let seconds = 0;
+  let minutes = 0;
+
+  function add() {
+    seconds++;
+    if (seconds >= 60) {
+      seconds = 0;
+      minutes++;
     }
-  }
-}
 
-const counter = document.getElementsByTagName('time')[0];
-let seconds = 0;
-let minutes = 0;
+    counter.textContent = (minutes > 9 ? minutes : "0" + minutes) + ":" + (seconds > 9 ? seconds : "0" + seconds);
 
-function add() {
-  seconds++;
-  if (seconds >= 60) {
-    seconds = 0;
-    minutes++;
   }
 
-  counter.textContent = (minutes > 9 ? minutes : "0" + minutes) + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
-}
-
-function timer() {
-  setInterval(add, 1000);
-}
+  function timer() {
+    setInterval(add, 1000);
+  }
