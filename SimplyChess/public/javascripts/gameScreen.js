@@ -3,10 +3,15 @@ const elem = document.documentElement;
 
 /* View in fullscreen */
 function toggleFullScreen() {
-  if(document.fullscreen) {
-    document.exitFullscreen();
+  if(document.fullscreenElement || document.webkitfullscreenElement) {
+    if (document.cancelFullScreen) {  
+      document.cancelFullScreen();  
+    } else if (document.mozCancelFullScreen) {  
+      document.mozCancelFullScreen();  
+    } else if (document.webkitCancelFullScreen) {  
+      document.webkitCancelFullScreen();  
+    }  
   } else {
-
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.mozRequestFullScreen) { /* Firefox */
@@ -18,21 +23,23 @@ function toggleFullScreen() {
     }
   }
 }
-  const counter = document.getElementsByTagName('time')[0];
-  let seconds = 0;
-  let minutes = 0;
 
-  function add() {
-    seconds++;
-    if (seconds >= 60) {
-      seconds = 0;
-      minutes++;
-    }
 
-    counter.textContent = (minutes > 9 ? minutes : "0" + minutes) + ":" + (seconds > 9 ? seconds : "0" + seconds);
+const counter = document.getElementsByTagName('time')[0];
+let seconds = 0;
+let minutes = 0;
 
+function add() {
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
   }
 
-  function timer() {
-    setInterval(add, 1000);
-  }
+  counter.textContent = (minutes > 9 ? minutes : "0" + minutes) + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+}
+
+function timer() {
+  setInterval(add, 1000);
+}
