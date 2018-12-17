@@ -3,7 +3,8 @@ const elem = document.documentElement;
 
 /* View in fullscreen */
 function toggleFullScreen() {
-  if(document.fullscreenElement || document.webkitfullscreenElement) {
+  if (document.mozFullScreen || document.webkitIsFullScreen) {
+    // is in fullscreen
     if (document.cancelFullScreen) {  
       document.cancelFullScreen();  
     } else if (document.mozCancelFullScreen) {  
@@ -11,17 +12,16 @@ function toggleFullScreen() {
     } else if (document.webkitCancelFullScreen) {  
       document.webkitCancelFullScreen();  
     }  
-  } else {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) { /* Firefox */
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE/Edge */
-      elem.msRequestFullscreen();
-    }
-  }
+  } else {  
+    // is not in fullscreen
+    if (elem.requestFullScreen) {  
+      elem.requestFullScreen();  
+    } else if (elem.mozRequestFullScreen) {  
+      elem.mozRequestFullScreen();  
+    } else if (elem.webkitRequestFullScreen) {  
+      elem.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
+    }  
+  }  
 }
 
 
