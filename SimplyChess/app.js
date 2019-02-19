@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
   res.render(__dirname + '/views/splashScreen.ejs', {
     gamesPlayed: startedGames,
     playersOnline: wss.clients.size,
-    daysUntilLoan: Math.floor((new Date('2018-12-23') - new Date()) / 86400000),
+    daysUntilLoan: Math.floor((new Date('2019-02-23') - new Date()) / 86400000),
     visitCount: visitCount
   });
 });
